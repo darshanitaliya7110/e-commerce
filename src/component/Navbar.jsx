@@ -2,8 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+
+    const { cartData } = useSelector(state => state.cart)
+
     return (
         <nav
             style={{
@@ -41,6 +45,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                             fontSize: '1em',
                         }}>
+                        {cartData.length > 0 ? `(${cartData.length})` : ""}
                         Cart
                     </Link>
                 </div>

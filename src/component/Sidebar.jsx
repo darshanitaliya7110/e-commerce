@@ -2,6 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 
 const Sidebar = ({ categories }) => {
+
+
     return (
         <div
             style={{
@@ -36,7 +38,7 @@ const Sidebar = ({ categories }) => {
                 >
                     <h6>
                         <Link
-                            href="/"
+                            href="/product"
                             style={{
                                 display: "block",
                                 padding: "10px 20px",

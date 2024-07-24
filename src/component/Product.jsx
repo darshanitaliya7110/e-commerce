@@ -12,7 +12,6 @@ import Sidebar from "./Sidebar";
 const Product = () => {
     const dispatch = useDispatch();
     const { productData } = useSelector((state) => state.products);
-    console.log("productData", productData);
     useEffect(() => {
         dispatch(setProductData(data));
     }, [dispatch]);
