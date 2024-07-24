@@ -1,6 +1,9 @@
+import { addCart } from '@/actions/cartAction';
 import React from 'react'
+import { useDispatch } from 'react-redux';
 
 const ProductList = ({ products }) => {
+    const dispatch = useDispatch()
     return (
         <div
             style={{
@@ -65,6 +68,7 @@ const ProductList = ({ products }) => {
                                 {product.description}
                             </p>
                             <button
+                                onClick={() => { dispatch(addCart(product)) }}
                                 style={{
                                     padding: "10px 20px",
                                     backgroundColor: "#0070f3",
