@@ -1,3 +1,9 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <>Start Project</>;
+  return (
+    <>
+      <Link href="/product">Product</Link>
+    </>
+  );
 }
