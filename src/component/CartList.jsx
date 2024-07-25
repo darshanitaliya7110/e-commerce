@@ -1,12 +1,13 @@
-import { removeFromCart } from '@/actions/cartAction'
+import { clearCart, removeFromCart } from '@/actions/cartAction'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CartList = () => {
+
     const dispatch = useDispatch()
     const { cartData } = useSelector(state => state.cart)
 
-    const totalPrice = cartData.reduce((total, item) => total + item.price, 0);
+    const totalPrice = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const handleRemoveFromCart = (id) => {
         if (confirm("Are you sure you want to remove product from cart?")) dispatch(removeFromCart({ id }))
@@ -67,11 +68,11 @@ const CartList = () => {
                             <p
                                 style={{
                                     flex: '1',
-                                    fontSize: '1.2em',
+                                    fontSize: '1em',
                                     color: '#555',
-                                    textAlign: 'center',
+                                    textAlign: 'left',
                                 }}>
-                                ${item.price}
+                                {item.quantity} X ${item.price} = {item.quantity * item.price}
                             </p>
                             <button
                                 style={{
@@ -145,6 +146,7 @@ const CartList = () => {
                                 }} onClick={() => { }}>
                                 Checkout
                             </button>
+
                         </div>
                     </>
                 }

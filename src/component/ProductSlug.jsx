@@ -25,7 +25,12 @@ const ProductSlug = () => {
         <div>
             <Navbar />
             <Sidebar categories={productData.categories} />
-            <ProductList products={product} />
+            {product?.length > 0 ? <ProductList products={product} /> : <p style={{
+                marginLeft: "25rem",
+                flexWrap: "wrap",
+                justifyContent: "right",
+                padding: "10px",
+            }}>No item in cart</p>}
         </div>
     )
 }

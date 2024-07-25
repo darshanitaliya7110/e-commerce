@@ -5,7 +5,6 @@ import { data } from "@/data";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Navbar";
-import Link from "next/link";
 import ProductList from "./ProductList";
 import Sidebar from "./Sidebar";
 
