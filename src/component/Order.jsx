@@ -6,7 +6,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Admin = () => {
+const Order = () => {
 
     const dispatch = useDispatch()
     const { orderData } = useSelector(state => state.orders)
@@ -47,7 +47,6 @@ const Admin = () => {
                         marginTop: '20px',
                     }}
                 >
-
                     <thead>
 
                         <tr>
@@ -129,4 +128,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default Order
