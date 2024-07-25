@@ -10,8 +10,9 @@ const ProductSlug = () => {
     const { productData } = useSelector(state => state.products)
     const [product, setProduct] = useState(null);
 
+
     const filterProductData = useCallback(() => {
-        const tempData = productData.products?.filter((item) => item.category === params.slug)
+        const tempData = productData?.filter((item) => item.category === params.slug)
         setProduct(tempData)
     }, [params, productData])
 
