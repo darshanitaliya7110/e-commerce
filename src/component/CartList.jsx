@@ -76,12 +76,11 @@ const CartList = () => {
                             </h4>
                             <p
                                 style={{
-                                    flex: '1',
                                     fontSize: '1em',
                                     color: '#555',
                                     textAlign: 'left',
                                 }}>
-                                {item.quantity} X ${item.price} = {item.quantity * item.price}
+                                {item.quantity} X ₹{item.price} = {item.quantity * item.price}
                             </p>
                             <button
                                 style={{
