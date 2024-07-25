@@ -1,1 +1,5 @@
 export const SET_PRODUCT_DATA = `SET_PRODUCT_DATA`;
+
+export const ADD_CART_DATA = `ADD_CART_DATA`;
+export const REMOVE_CART_DATA = `REMOVE_CART_DATA`;
+export const CLEAR_CART_DATA = `CLEAR_CART_DATA`;
