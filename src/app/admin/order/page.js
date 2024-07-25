@@ -1,11 +1,11 @@
-import AddProduct from "@/component/AddProduct";
+import Order from "@/component/Order";
 import React from "react";
 
 const page = () => {
   return (
-    <>
-      <AddProduct />
-    </>
+    <div>
+      <Order />
+    </div>
   );
 };
 

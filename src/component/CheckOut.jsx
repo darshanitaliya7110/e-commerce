@@ -64,7 +64,7 @@ const CheckOut = () => {
         }
 
         const id = uniqid()
-        const data = { ...formData, id, cartData }
+        const data = { ...formData, id, cartData, orderStatus: false }
         addOrderDataFirestore(data)
         dispatch(clearCart())
         e.target.reset();

@@ -1,17 +1,16 @@
 "use client"
 
-import { setOrderData } from '@/actions/orderAction'
+import { deleteOrderData, setOrderData, updateStatus } from '@/actions/orderAction'
 import { db } from '@/app/firebase'
-import { collection, getDocs } from 'firebase/firestore'
-import React, { useCallback, useEffect } from 'react'
+import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Admin = () => {
+const Order = () => {
 
     const dispatch = useDispatch()
     const { orderData } = useSelector(state => state.orders)
 
-    console.log("orderData", orderData)
 
     const getOrderDateFirestore = useCallback(async () => {
         try {
@@ -27,9 +26,24 @@ const Admin = () => {
         }
     }, [dispatch])
 
+
     useEffect(() => {
         getOrderDateFirestore()
     }, [getOrderDateFirestore])
+
+    const handleUpdateStatus = async (item) => {
+        const orderRef = doc(db, "orders", item.id);
+        await updateDoc(orderRef, { ...item, orderStatus: true });
+        dispatch(updateStatus({ id: item.id, status: true }))
+    }
+
+    const handleDelete = async (id) => {
+        if (confirm('Are you sure you want to delete this entry?')) {
+
+            await deleteDoc(doc(db, 'orders', id))
+            dispatch(deleteOrderData({ id }))
+        }
+    }
 
     return (
         <div style={{
@@ -40,14 +54,13 @@ const Admin = () => {
             <>
                 <hr />
 
-                <table
+                {orderData.length > 0 ? <table
                     style={{
                         width: '100%',
                         borderCollapse: 'collapse',
                         marginTop: '20px',
                     }}
                 >
-
                     <thead>
 
                         <tr>
@@ -87,6 +100,15 @@ const Admin = () => {
                             >
                                 Shipped
                             </th>
+                            <th
+                                style={{
+                                    border: '1px solid #ddd',
+                                    padding: '8px',
+                                    backgroundColor: '#f2f2f2',
+                                }}
+                            >
+                                Delete
+                            </th>
 
                         </tr>
                     </thead>
@@ -102,23 +124,30 @@ const Admin = () => {
                                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                                     {item.cartData.reduce((sum, i) => sum = sum + i.price * i.quantity, 0)}
                                 </td>
-                                <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                                    Shipped
-                                </td>
 
-                                {/* <td
+
+                                <td
                                     style={{
                                         border: '1px solid #ddd',
                                         padding: '8px',
                                         textAlign: 'center',
                                     }}
                                 >
-                                    <Button onClick={() => handleDelete(item.id)}>Delete</Button>
-                                </td> */}
+                                    <button onClick={() => handleUpdateStatus(item)}>{item.orderStatus ? "Shipped" : "Pending"}</button>
+                                </td>
+                                <td
+                                    style={{
+                                        border: '1px solid #ddd',
+                                        padding: '8px',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    <button onClick={() => handleDelete(item.id)}>Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
-                </table >
+                </table > : <p>No any order</p>}
             </>
 
 
@@ -129,4 +158,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default Order;
