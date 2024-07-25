@@ -1,7 +1,13 @@
+"use client"
+
 import Link from 'next/link'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-const Sidebar = ({ categories }) => {
+const Sidebar = () => {
+
+    const dispatch = useDispatch();
+    const { productData } = useSelector((state) => state.products);
 
 
     return (
@@ -58,7 +64,7 @@ const Sidebar = ({ categories }) => {
                         padding: "0",
                     }}
                 >
-                    {categories?.map((item, ind) => {
+                    {productData.categories?.map((item, ind) => {
                         return <li key={ind}>
                             <Link
                                 href={`/product/${item}`}

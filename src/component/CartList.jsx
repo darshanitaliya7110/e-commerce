@@ -1,16 +1,25 @@
 import { clearCart, removeFromCart } from '@/actions/cartAction'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const CartList = () => {
 
     const dispatch = useDispatch()
+    const router = useRouter()
     const { cartData } = useSelector(state => state.cart)
 
     const totalPrice = cartData.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const handleRemoveFromCart = (id) => {
         if (confirm("Are you sure you want to remove product from cart?")) dispatch(removeFromCart({ id }))
+    }
+
+    const handleCheckOut = () => {
+        router.push('/cart/checkout')
+    }
+    const handleHomePage = () => {
+        router.push('/product')
     }
     return (
         <div style={{
@@ -129,7 +138,7 @@ const CartList = () => {
                                     cursor: 'pointer',
                                     textAlign: 'center',
                                     margin: "1rem"
-                                }} onClick={() => { }}>
+                                }} onClick={() => handleHomePage()}>
                                 Continue Shopping
                             </button>
                             <button
@@ -143,7 +152,7 @@ const CartList = () => {
                                     cursor: 'pointer',
                                     textAlign: 'center',
                                     margin: "1rem"
-                                }} onClick={() => { }}>
+                                }} onClick={() => handleCheckOut()}>
                                 Checkout
                             </button>
 
