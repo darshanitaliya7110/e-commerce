@@ -3,8 +3,6 @@
 import { useParams } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import Navbar from './Navbar';
-import Sidebar from './Sidebar';
 import ProductList from './ProductList';
 
 const ProductSlug = () => {
@@ -23,14 +21,12 @@ const ProductSlug = () => {
 
     return (
         <div>
-            <Navbar />
-            <Sidebar categories={productData.categories} />
             {product?.length > 0 ? <ProductList products={product} /> : <p style={{
                 marginLeft: "25rem",
                 flexWrap: "wrap",
                 justifyContent: "right",
                 padding: "10px",
-            }}>No item in cart</p>}
+            }}>No item in this category</p>}
         </div>
     )
 }

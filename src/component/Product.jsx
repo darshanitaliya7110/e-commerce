@@ -4,9 +4,7 @@ import { setProductData } from "@/actions/productAction";
 import { data } from "@/data";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "./Navbar";
 import ProductList from "./ProductList";
-import Sidebar from "./Sidebar";
 import { db } from "@/app/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -14,7 +12,7 @@ const Product = () => {
     const dispatch = useDispatch();
     const { productData } = useSelector((state) => state.products);
 
-    const addProductDtaFirestore = useCallback(async (data) => {
+    const addProductDataFirestore = useCallback(async (data) => {
         try {
             await setDoc(doc(db, 'products', "allProduct"), data)
         } catch (error) {
@@ -41,14 +39,14 @@ const Product = () => {
     }, [dispatch])
 
     useEffect(() => {
-        addProductDtaFirestore(data)
+        addProductDataFirestore(data)
         getProductDataFirestore()
-    }, [dispatch, addProductDtaFirestore, getProductDataFirestore]);
+    }, [dispatch, addProductDataFirestore, getProductDataFirestore]);
 
     return (
         <div>
-            <Navbar />
-            <Sidebar categories={productData.categories} />
+            {/* <Navbar />
+            <Sidebar categories={productData.categories} /> */}
             <ProductList products={productData.products} />
         </div>
     );
