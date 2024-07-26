@@ -3,6 +3,7 @@
 import { deleteOrderData, setOrderData, updateStatus } from '@/actions/orderAction'
 import { db } from '@/app/firebase'
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { redirect } from 'next/navigation'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,6 +12,9 @@ const Order = () => {
     const dispatch = useDispatch()
     const { orderData } = useSelector(state => state.orders)
 
+    if (!localStorage.getItem("userUID")) {
+        redirect('/admin')
+    }
 
     const getOrderDateFirestore = useCallback(async () => {
         try {

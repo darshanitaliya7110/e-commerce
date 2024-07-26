@@ -9,51 +9,20 @@ const Sidebar = () => {
     return (
         <div
             style={{
-                width: "10rem",
-                height: "100vh",
                 backgroundColor: "#333",
                 color: "white",
                 position: "fixed",
-                top: "0",
-                left: "0",
                 padding: "20px",
             }}
         >
             <div
                 style={{
-                    width: "10rem",
                     height: "100vh",
                     backgroundColor: "#333",
                     color: "white",
-                    position: "fixed",
-                    top: "0",
-                    left: "0",
                     padding: "20px",
                 }}
             >
-                <div
-                    style={{
-                        fontSize: "24px",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                    }}
-                >
-                    <h6>
-                        <Link
-                            href="/product"
-                            style={{
-                                display: "block",
-                                padding: "10px 20px",
-                                color: "white",
-                                textDecoration: "none",
-                                marginBottom: "10px",
-                                transition: "background-color 0.3s",
-                            }}
-                        >
-                            E-Commerce
-                        </Link>
-                    </h6>
-                </div>
                 <ul
                     style={{
                         listStyle: "none",
@@ -77,6 +46,21 @@ const Sidebar = () => {
                             </Link>
                         </li>
                     })}
+                    <li >
+                        <Link
+                            href={`/admin`}
+                            style={{
+                                display: "block",
+                                padding: "10px 20px",
+                                color: "white",
+                                textDecoration: "none",
+                                marginBottom: "10px",
+                                transition: "background-color 0.3s",
+                            }}
+                        >
+                            Administration
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
