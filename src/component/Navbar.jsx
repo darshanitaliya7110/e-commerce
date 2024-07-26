@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }) => {
 
     const { cartData } = useSelector(state => state.cart)
 
@@ -23,31 +23,45 @@ const Navbar = () => {
                     maxWidth: '1200px',
                     margin: '0 auto',
                 }}>
-                <div
-                    href="/"
+                <Link
+                    href="/product"
                     style={{
-                        fontSize: '1.5em',
-                        fontWeight: 'bold',
-                        color: '#fff',
-                        textDecoration: 'none',
-                    }}>
-                </div>
+                        display: "block",
+                        padding: "10px 20px",
+                        color: "white",
+                        textDecoration: "none",
+                        marginBottom: "10px",
+                        transition: "background-color 0.3s",
+                    }}
+                >
+                    E-Commerce
+                </Link>
                 <div
                     style={{
                         display: 'flex',
                         gap: '15px',
                         justifyContent: 'space-end',
                     }}>
-                    <Link
-                        href="/cart"
+                    {isAdmin ? <Link
+                        href="/product"
                         style={{
                             color: '#fff',
                             textDecoration: 'none',
                             fontSize: '1em',
                         }}>
                         {cartData.length > 0 ? `(${cartData.length})` : ""}
-                        Cart
-                    </Link>
+                        Products
+                    </Link> :
+                        <Link
+                            href="/cart"
+                            style={{
+                                color: '#fff',
+                                textDecoration: 'none',
+                                fontSize: '1em',
+                            }}>
+                            {cartData.length > 0 ? `(${cartData.length})` : ""}
+                            Cart
+                        </Link>}
                 </div>
             </div>
         </nav>
