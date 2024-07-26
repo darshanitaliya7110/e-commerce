@@ -77,6 +77,21 @@ const Sidebar = () => {
                             </Link>
                         </li>
                     })}
+                    <li >
+                        <Link
+                            href={`/admin`}
+                            style={{
+                                display: "block",
+                                padding: "10px 20px",
+                                color: "white",
+                                textDecoration: "none",
+                                marginBottom: "10px",
+                                transition: "background-color 0.3s",
+                            }}
+                        >
+                            Administration
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
