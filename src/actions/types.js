@@ -9,3 +9,6 @@ export const CLEAR_CART_DATA = `CLEAR_CART_DATA`;
 export const SET_ORDER_DATA = `SET_ORDER_DATA`;
 export const UPDATE_STATUS = `UPDATE_STATUS`;
 export const DELETE_ORDER_DATA = `DELETE_ORDER_DATA`;
+
+export const SET_USER = `SET_USER`;
+export const CLEAR_USER = `CLEAR_USER`;

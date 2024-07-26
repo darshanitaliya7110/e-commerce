@@ -2,12 +2,20 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { auth } from '@/app/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { redirect, useRouter } from 'next/navigation';
 
 const Register = () => {
+  const router = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  if (localStorage.getItem("userUID")) {
+    redirect('/admin/order')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,10 +24,16 @@ const Register = () => {
       setMessage('Passwords do not match');
       return;
     }
+
+
+    await createUserWithEmailAndPassword(auth, email, password)
+
+    router.push("/admin")
+
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
         <h2>Register</h2>
         <label>

@@ -1,81 +1,103 @@
 "use client"
 
+import { clearUser } from '@/actions/userAction'
+import { getAuth, signOut } from 'firebase/auth'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+// import React from 'react'
+import { useDispatch } from 'react-redux'
 
 const AdminSidebar = () => {
+
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const UID = localStorage.getItem("userUID")
+
+    const handleLogout = () => {
+        const auth = getAuth()
+        signOut(auth).then().catch((error) => { throw error })
+
+        dispatch(clearUser())
+        router.push("/product")
+
+        localStorage.clear("userUID");
+
+    }
+
     return (
-        <div
-            style={{
-                backgroundColor: "#333",
-                color: "white",
-                position: "fixed",
-                padding: "20px",
-            }}
-        >
-            <div
+        <>
+            {UID && <div
                 style={{
-                    height: "100vh",
                     backgroundColor: "#333",
                     color: "white",
+                    position: "fixed",
                     padding: "20px",
                 }}
             >
-                <ul
+                <div
                     style={{
-                        listStyle: "none",
-                        padding: "0",
+                        height: "100vh",
+                        backgroundColor: "#333",
+                        color: "white",
+                        padding: "20px",
                     }}
                 >
-                    <li>
-                        <Link
-                            href={`/admin/order`}
-                            style={{
-                                display: "block",
-                                padding: "10px 20px",
-                                color: "white",
-                                textDecoration: "none",
-                                marginBottom: "10px",
-                                transition: "background-color 0.3s",
-                            }}
-                        >
-                            Order
-                        </Link>
-                    </li>
-                    <li >
-                        <Link
-                            href={`/admin/productlist`}
-                            style={{
-                                display: "block",
-                                padding: "10px 20px",
-                                color: "white",
-                                textDecoration: "none",
-                                marginBottom: "10px",
-                                transition: "background-color 0.3s",
-                            }}
-                        >
-                            All Products
-                        </Link>
-                    </li>
-                    <li >
-                        <Link
-                            href={`/product`}
-                            style={{
-                                display: "block",
-                                padding: "10px 20px",
-                                color: "white",
-                                textDecoration: "none",
-                                marginBottom: "10px",
-                                transition: "background-color 0.3s",
-                            }}
-                            onClick={() => { console.log("Logout") }}
-                        >
-                            Logout
-                        </Link>
-                    </li>
-                </ul>
+                    <ul
+                        style={{
+                            listStyle: "none",
+                            padding: "0",
+                        }}
+                    >
+                        <li>
+                            <Link
+                                href={`/admin/order`}
+                                style={{
+                                    display: "block",
+                                    padding: "10px 20px",
+                                    color: "white",
+                                    textDecoration: "none",
+                                    marginBottom: "10px",
+                                    transition: "background-color 0.3s",
+                                }}
+                            >
+                                Order
+                            </Link>
+                        </li>
+                        <li >
+                            <Link
+                                href={`/admin/productlist`}
+                                style={{
+                                    display: "block",
+                                    padding: "10px 20px",
+                                    color: "white",
+                                    textDecoration: "none",
+                                    marginBottom: "10px",
+                                    transition: "background-color 0.3s",
+                                }}
+                            >
+                                All Products
+                            </Link>
+                        </li>
+                        <li >
+                            <Link
+                                href={`/product`}
+                                style={{
+                                    display: "block",
+                                    padding: "10px 20px",
+                                    color: "white",
+                                    textDecoration: "none",
+                                    marginBottom: "10px",
+                                    transition: "background-color 0.3s",
+                                }}
+                                onClick={() => handleLogout()}
+                            >
+                                Logout
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+            }</>
     )
 }
 

@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import uniqid from 'uniqid';
 import AdminProductList from './AdminProductList';
+import { redirect } from 'next/navigation';
 
 
 const AddProduct = () => {
@@ -21,6 +22,9 @@ const AddProduct = () => {
     const [price, setPrice] = useState('')
     const [id, setId] = useState(null)
 
+    if (!localStorage.getItem("userUID")) {
+        redirect('/admin')
+    }
 
     const handleEdit = (id) => {
         const itemToEdit = productData.find((item) => item.id === id)
