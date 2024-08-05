@@ -11,10 +11,17 @@ const Order = () => {
 
     const dispatch = useDispatch()
     const { orderData } = useSelector(state => state.orders)
+    const [isAdmin, setIsAdmin] = useState(false)
 
-    if (!localStorage.getItem("userUID")) {
-        redirect('/admin')
-    }
+    useEffect(() => {
+        setIsAdmin(true)
+    }, [])
+
+    useEffect(() => {
+        if (isAdmin && !localStorage.getItem("userUID")) {
+            redirect('/admin')
+        }
+    }, [isAdmin])
 
     const getOrderDateFirestore = useCallback(async () => {
         try {

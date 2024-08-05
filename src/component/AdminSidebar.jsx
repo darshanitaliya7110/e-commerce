@@ -4,13 +4,19 @@ import { clearUser } from '@/actions/userAction'
 import { getAuth, signOut } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 const AdminSidebar = () => {
 
     const dispatch = useDispatch()
     const router = useRouter()
-    const UID = localStorage.getItem("userUID")
+    const [UID, setUID] = useState(null)
+
+    useEffect(() => {
+        const userUID = localStorage.getItem("userUID")
+        setUID(userUID)
+    }, [])
 
     const handleLogout = () => {
         const auth = getAuth()
@@ -19,8 +25,7 @@ const AdminSidebar = () => {
         dispatch(clearUser())
         router.push("/product")
 
-        localStorage.clear("userUID");
-
+        localStorage.removeItem("userUID")
     }
 
     return (
