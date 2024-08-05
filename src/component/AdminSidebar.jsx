@@ -4,7 +4,6 @@ import { clearUser } from '@/actions/userAction'
 import { getAuth, signOut } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-// import React from 'react'
 import { useDispatch } from 'react-redux'
 
 const AdminSidebar = () => {
